@@ -17,7 +17,8 @@
      award            short sticker text on the sleeve, e.g. "Top score"
      context          small line at the bottom of the back cover
      clip             path to a 10–20s muted MP4 shown on the back cover
-     video, videoLength  full YouTube walkthrough + its duration
+     videoSource      where the video lives, e.g. "LinkedIn" (default "YouTube")
+     videoLength      the video's duration, shown on its button
      links            { demo, repo, video, deck }
      cover            { style: rings|dots|stripes|waves, bg, ink, accent }
    ================================================================== */
@@ -81,12 +82,15 @@ const PROJECTS = [
     ],
     notes: "YieldVest was a team class project to design an investment marketplace for asset classes most retail investors never see. I focused on the finance and business side: researching how real P2P lending, invoice discounting and structured debt products work, turning that research into the product cards investors browse, and building the business case we pitched. The project received the highest score in the class.",
     team: [
-      { name: "kunthshah21", url: "https://github.com/kunthshah21" },
-      { name: "MaanyaDN", url: "https://github.com/MaanyaDN" }
+      { name: "Kunth Shah", url: "https://github.com/kunthshah21" },
+      { name: "Arya Namboodiri" },
+      { name: "Maanya DN", url: "https://github.com/MaanyaDN" }
     ],
     award: "Top score",
-    context: "Class project · Highest score in the class",
+    context: "FinTech course, FLAME University · Highest score in the class",
+    videoSource: "LinkedIn",
     links: {
+      video: "https://www.linkedin.com/posts/kunth-shah-71209a1a7_fintech-productdevelopment-aiinfinance-ugcPost-7454813852745125888-cmBJ/",
       repo: "https://github.com/kunthshah21/Fintech-Platform"
     },
     cover: { style: "rings", bg: "#13302a", ink: "#e9dcb4", accent: "#d9a441" }

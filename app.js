@@ -82,7 +82,7 @@ const ICONS = {
 };
 const LINKS = [
   ["demo",  "Try the live demo",    "Opens the app"],
-  ["video", "Watch the full walkthrough", "YouTube"],
+  ["video", "Watch the demo video", "YouTube"],
   ["repo",  "Browse the code",      "GitHub repository"],
   ["deck",  "Read the case study",  "PDF / slides"]
 ];
@@ -217,7 +217,7 @@ function renderPlayer(p){
   const links = LINKS.filter(([k]) => p.links[k]).map(([k, label, sub]) => `
     <a class="link-tile" href="${p.links[k]}" target="_blank" rel="noopener">
       <span class="link-icon">${ICONS[k]}</span>
-      <span><strong>${label}</strong><span class="sub">${sub}${k === "video" && p.videoLength ? " · " + esc(p.videoLength) : ""} ↗</span></span>
+      <span><strong>${label}</strong><span class="sub">${k === "video" && p.videoSource ? esc(p.videoSource) : sub}${k === "video" && p.videoLength ? " · " + esc(p.videoLength) : ""} ↗</span></span>
     </a>`).join("");
   const track = (list, side) => list.map((t, i) => `<li><span class="no">${side}${i + 1}</span><span>${esc(t)}</span></li>`).join("");
 
