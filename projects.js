@@ -26,7 +26,7 @@ const SITE = {
   artist: "Shardul Gupta",
   aka: "Sherry",
   catalogPrefix: "SG",
-  tools: ["Python", "pandas", "scikit-learn", "SQL", "Tableau", "Power BI"],
+  tools: ["Python", "pandas", "NumPy", "scikit-learn", "TensorFlow", "SQL", "Excel", "Tableau", "Power BI"],
   github: "https://github.com/shardulg2002",
   linkedin: "https://www.linkedin.com/in/shardul-gupta-2002",
   email: "collegeshardul@gmail.com"
