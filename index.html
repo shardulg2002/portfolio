@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shardul Gupta · Discography</title>
+<meta name="description" content="Shardul (Sherry) Gupta: MSc Business Analytics & AI at Warwick Business School. A record wall of projects in machine learning, data and finance.">
+<meta property="og:title" content="Shardul Gupta · Discography">
+<meta property="og:description" content="Every record on this wall is a project. MSc Business Analytics & AI at Warwick Business School.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f0f11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23111113'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23222226' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%23222226' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='10' fill='%23f1e4c8'/%3E%3Ccircle cx='32' cy='32' r='2' fill='%23111113'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page">
+  <header class="site-head">
+    <a class="brand" href="#" id="top-link"><span class="vinyl-wrap" style="--label:var(--accent)" aria-hidden="true"><span class="vinyl"></span></span><span id="brand-name">Shardul Gupta</span></a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#discography">Discography</a>
+      <a href="#about">About</a>
+      <a href="#press-kit">Press kit</a>
+    </nav>
+  </header>
+
+  <section class="intro" id="top">
+    <h1><span id="hero-name">Shardul Gupta</span><span class="aka">a.k.a. <em>Sherry</em></span></h1>
+    <p>I'm doing an MSc in Business Analytics and Artificial Intelligence at <strong>Warwick Business School</strong>, specialising in predictive and prescriptive analytics. I build machine learning and data science projects with a focus on banking and finance.</p>
+    <p class="hint"><strong>Every record on this wall is a project.</strong> Hover or tap a sleeve to read about it, then open it to see the back cover with my role, the full story and links to the project.</p>
+  </section>
+
+  <section class="featured" id="featured" aria-label="Featured release"></section>
+
+  <section id="discography" aria-labelledby="disco-title">
+    <div class="section-head">
+      <div>
+        <div class="mono" id="disco-count"></div>
+        <h2 id="disco-title">Discography</h2>
+      </div>
+      <div class="section-tools">
+        <div class="filters" id="filters" role="group" aria-label="Filter projects by genre"></div>
+        <div class="view-toggle" role="group" aria-label="Layout">
+          <button class="seg" type="button" data-view="wall" aria-pressed="true">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="5.5" height="5.5" rx="1"/><rect x="7.5" y="0" width="5.5" height="5.5" rx="1"/><rect x="0" y="7.5" width="5.5" height="5.5" rx="1"/><rect x="7.5" y="7.5" width="5.5" height="5.5" rx="1"/></svg>Wall
+          </button>
+          <button class="seg" type="button" data-view="shelf" aria-pressed="false">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor" aria-hidden="true"><rect x="0.5" y="1" width="2.4" height="10" rx=".6"/><rect x="3.8" y="2.5" width="2.4" height="8.5" rx=".6"/><rect x="7.1" y="1" width="2.4" height="10" rx=".6"/><rect x="0" y="11.6" width="13" height="1.4" rx=".5"/></svg>Shelf
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="crate" id="crate"></div>
+    <div class="shelf-view" id="shelf-view" hidden>
+      <div class="stand" id="stand" aria-live="polite"></div>
+      <div class="shelf" id="shelf" role="list" aria-label="Records on the shelf"></div>
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div>
+      <div class="mono">Artist bio</div>
+      <h2 id="about-title">About me</h2>
+      <p>I'm Shardul, though a lot of people know me as Sherry. I'm studying for an MSc in Business Analytics and Artificial Intelligence at Warwick Business School, specialising in predictive and prescriptive analytics, and I want to apply machine learning in banking and finance.</p>
+      <p>Music is my other passion, which is why this site is a record wall. Each release has its own back cover with the full story, including my role and who I made it with.</p>
+      <div class="mono skills-label">Tools I work with</div>
+      <ul class="tags" id="skills"></ul>
+    </div>
+    <div id="press-kit">
+      <div class="mono">Press kit</div>
+      <h2>Resume &amp; contact</h2>
+      <div class="press">
+        <div class="press-row">
+          <div><span class="label">Resume</span><span class="value">PDF, one page</span></div>
+          <button class="btn btn-ghost btn-sm" type="button" disabled>Coming soon</button>
+        </div>
+        <div class="press-row">
+          <div><span class="label">GitHub</span><span class="value">github.com/shardulg2002</span></div>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/shardulg2002" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <div class="press-row">
+          <div><span class="label">LinkedIn</span><span class="value">linkedin.com/in/shardul-gupta-2002</span></div>
+          <a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/in/shardul-gupta-2002" target="_blank" rel="noopener">Open ↗</a>
+        </div>
+        <div class="press-row">
+          <div><span class="label">Email</span><span class="value" id="email">collegeshardul@gmail.com</span></div>
+          <button class="btn btn-primary btn-sm" type="button" id="copy-email">Copy email</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span class="mono">© 2026 <span id="foot-name">Shardul Gupta</span></span>
+    <span class="mono">Pressed in HTML, CSS &amp; JavaScript</span>
+  </footer>
+</div>
+
+
+<dialog class="player" id="player" aria-labelledby="player-title">
+  <div class="player-bar">
+    <div class="left">
+      <button class="btn btn-ghost btn-sm" type="button" id="flip-btn">Show front</button>
+      <button class="btn btn-ghost btn-sm" type="button" id="copy-link">Copy link to project</button>
+    </div>
+    <div class="right">
+      <button class="btn btn-primary btn-sm" type="button" id="close-btn">Close</button>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="flipper" id="flipper">
+      <div class="face face-front" id="face-front"></div>
+      <div class="face face-back" id="face-back"></div>
+    </div>
+  </div>
+</dialog>
+
+<script src="projects.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
