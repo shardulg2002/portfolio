@@ -72,7 +72,9 @@ button{font:inherit;color:inherit}
 .sleeve-meta{position:absolute;top:12px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:start;gap:8px;color:var(--ink);z-index:1}
 .sleeve-title{font-family:var(--font-display);font-weight:800;font-size:clamp(17px,2vw,22px);line-height:1;letter-spacing:-.02em}
 .sleeve-cat{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;opacity:.85;padding-top:2px;white-space:nowrap;flex:none}
-.sleeve-title{min-width:0;overflow-wrap:anywhere}
+.sleeve-title{min-width:0;overflow-wrap:break-word}
+.sleeve-meta{flex-wrap:wrap}
+.sleeve-meta .sleeve-cat{margin-left:auto}
 
 /* ---------- Header + intro ---------- */
 .site-head{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;padding-block:22px;flex-wrap:wrap}

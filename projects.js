@@ -20,7 +20,7 @@
      videoSource      where the video lives, e.g. "LinkedIn" (default "YouTube")
      videoLength      the video's duration, shown on its button
      links            { demo, repo, video, deck }
-     cover            { style: rings|dots|stripes|waves, bg, ink, accent }
+     cover            { style: yield|abtest|rings|dots|stripes|waves, bg, ink, accent }
    ================================================================== */
 
 const SITE = {
@@ -57,7 +57,7 @@ const PROJECTS = [
     award: "Top score",
     context: "Class project · Highest score in the class",
     links: { repo: "https://github.com/samichi-rungta/gamified_feedback_platform" },
-    cover: { style: "dots", bg: "#2b1f3a", ink: "#f0c9a0", accent: "#7fd1b9" }
+    cover: { style: "abtest", bg: "#2b1f3a", ink: "#f0c9a0", accent: "#7fd1b9" }
   },
   {
     id: "yieldvest",
@@ -93,6 +93,6 @@ const PROJECTS = [
       video: "https://www.linkedin.com/posts/kunth-shah-71209a1a7_fintech-productdevelopment-aiinfinance-ugcPost-7454813852745125888-cmBJ/",
       repo: "https://github.com/kunthshah21/Fintech-Platform"
     },
-    cover: { style: "rings", bg: "#13302a", ink: "#e9dcb4", accent: "#d9a441" }
+    cover: { style: "yield", bg: "#13302a", ink: "#e9dcb4", accent: "#d9a441" }
   }
 ];

@@ -54,6 +54,83 @@ function drawCover(p){
     }
     g.globalAlpha = 1;
   }
+  if (style === "yield"){
+    // YieldVest: three asset classes stacked as a rising area chart, with the yield line on top
+    const base = S * 0.94, X0 = 0, X1 = S;
+    const grow = (x, start, end) => { const u = (x - X0) / (X1 - X0); return start + (end - start) * (Math.exp(2.1 * u) - 1) / (Math.exp(2.1) - 1); };
+    // faint grid
+    g.strokeStyle = ink; g.globalAlpha = 0.08; g.lineWidth = 1;
+    for (let i = 1; i < 8; i++){ g.beginPath(); g.moveTo(0, S * i / 8); g.lineTo(S, S * i / 8); g.stroke(); }
+    for (let i = 1; i < 8; i++){ g.beginPath(); g.moveTo(S * i / 8, S * 0.3); g.lineTo(S * i / 8, S); g.stroke(); }
+    const layers = [
+      { start: 0.05, end: 0.20, alpha: 0.22, color: ink },    // structured debt
+      { start: 0.04, end: 0.19, alpha: 0.40, color: ink },    // invoice discounting
+      { start: 0.03, end: 0.20, alpha: 0.85, color: accent }  // P2P lending
+    ];
+    let prev = x => base;
+    const wob = x => Math.sin(x * 0.03 + 1.7) * 3 + Math.sin(x * 0.011) * 5;
+    layers.forEach((L, i) => {
+      const lower = prev;
+      const upper = x => lower(x) - S * grow(x, L.start, L.end) + wob(x + i * 40) * 0.6;
+      g.beginPath(); g.moveTo(0, lower(0));
+      for (let x = 0; x <= S; x += 6) g.lineTo(x, upper(x));
+      for (let x = S; x >= 0; x -= 6) g.lineTo(x, lower(x));
+      g.closePath(); g.fillStyle = L.color; g.globalAlpha = L.alpha; g.fill();
+      prev = upper;
+    });
+    // yield line floating above the stack
+    const top = prev;
+    const line = x => top(x) - S * 0.05 - S * 0.06 * ((x / S) ** 2);
+    g.globalAlpha = 1; g.strokeStyle = accent; g.lineWidth = 4; g.lineJoin = "round";
+    g.beginPath(); g.moveTo(0, line(0));
+    for (let x = 0; x <= S * 0.86; x += 6) g.lineTo(x, line(x));
+    g.stroke();
+    const ex = S * 0.86, ey = line(S * 0.86);
+    g.fillStyle = accent; g.beginPath(); g.arc(ex, ey, 10, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = accent; g.lineWidth = 2; g.globalAlpha = 0.5;
+    g.beginPath(); g.arc(ex, ey, 22, 0, Math.PI * 2); g.stroke();
+    g.globalAlpha = 0.25; g.beginPath(); g.arc(ex, ey, 36, 0, Math.PI * 2); g.stroke();
+    g.globalAlpha = 1;
+  }
+  if (style === "abtest"){
+    // FeedbackGameify: an A/B test. A = a plain form, B = the same form as a game
+    const mid = S / 2, padL = S * 0.07, colW = mid - padL * 1.6;
+    const rows = [0.25, 0.39, 0.53, 0.67, 0.81].map(v => v * S);
+    const rr = (x, y, w, h, rad) => { rad = Math.min(rad, w / 2, h / 2); g.beginPath(); g.moveTo(x + rad, y); g.arcTo(x + w, y, x + w, y + h, rad); g.arcTo(x + w, y + h, x, y + h, rad); g.arcTo(x, y + h, x, y, rad); g.arcTo(x, y, x + w, y, rad); g.closePath(); };
+    const star = (cx, cy, R, fill) => { g.beginPath(); for (let i = 0; i < 10; i++){ const a = -Math.PI / 2 + i * Math.PI / 5, rad = i % 2 ? R * 0.45 : R; g.lineTo(cx + Math.cos(a) * rad, cy + Math.sin(a) * rad); } g.closePath(); if (fill){ g.fill(); } else { g.stroke(); } };
+    // divider
+    g.strokeStyle = ink; g.globalAlpha = 0.25; g.lineWidth = 2; g.setLineDash([6, 8]);
+    g.beginPath(); g.moveTo(mid, S * 0.17); g.lineTo(mid, S * 0.95); g.stroke(); g.setLineDash([]);
+    // A / B labels
+    g.globalAlpha = 0.55; g.fillStyle = ink; g.font = '600 22px "JetBrains Mono", ui-monospace, monospace';
+    g.fillText("A", padL, S * 0.19); g.fillText("B", mid + padL, S * 0.19);
+    // A: plain form, label line + empty field per row
+    rows.forEach(y => {
+      g.globalAlpha = 0.35; g.fillStyle = ink; rr(padL, y - 22, colW * 0.45, 7, 3); g.fill();
+      g.globalAlpha = 0.3; g.strokeStyle = ink; g.lineWidth = 2; rr(padL, y - 6, colW, 34, 6); g.stroke();
+    });
+    const bx = mid + padL, bw = colW;
+    // B row 1: XP progress bar
+    g.globalAlpha = 0.3; g.fillStyle = ink; rr(bx, rows[0] - 2, bw, 18, 9); g.fill();
+    g.globalAlpha = 1; g.fillStyle = accent; rr(bx, rows[0] - 2, bw * 0.72, 18, 9); g.fill();
+    // B row 2: star rating
+    g.fillStyle = accent; g.strokeStyle = ink; g.lineWidth = 2;
+    for (let i = 0; i < 5; i++){ g.globalAlpha = i < 4 ? 1 : 0.45; star(bx + 16 + i * (bw / 5), rows[1] + 10, 15, i < 4); }
+    // B row 3: answer chips, one picked
+    for (let i = 0; i < 3; i++){ const w = bw / 3 - 8, x = bx + i * (w + 12);
+      if (i === 1){ g.globalAlpha = 1; g.fillStyle = accent; rr(x, rows[2] - 4, w, 30, 15); g.fill(); }
+      else { g.globalAlpha = 0.4; g.strokeStyle = ink; rr(x, rows[2] - 4, w, 30, 15); g.stroke(); } }
+    // B row 4: leaderboard bars
+    [0.95, 0.7, 0.5].forEach((v, i) => { g.globalAlpha = i === 0 ? 1 : 0.5; g.fillStyle = i === 0 ? ink : ink; rr(bx, rows[3] - 8 + i * 15, bw * 0.62 * v, 9, 4); g.fill(); });
+    // B: badge medal
+    const mx = bx + bw * 0.83, my = rows[3] + 6;
+    g.globalAlpha = 1; g.fillStyle = accent; g.beginPath(); g.arc(mx, my, 24, 0, Math.PI * 2); g.fill();
+    g.fillStyle = bg; star(mx, my, 13, true);
+    // confetti over B
+    for (let i = 0; i < 26; i++){ const x = mid + 14 + r() * (S - mid - 28), y = S * 0.2 + r() * S * 0.5, sz = 3 + r() * 5;
+      g.globalAlpha = 0.35 + r() * 0.5; g.fillStyle = r() < 0.5 ? accent : ink; g.save(); g.translate(x, y); g.rotate(r() * 3); g.fillRect(-sz / 2, -sz / 4, sz, sz / 2); g.restore(); }
+    g.globalAlpha = 1;
+  }
   // paper grain
   const img = g.getImageData(0, 0, S, S), d = img.data;
   for (let i = 0; i < d.length; i += 4){ const k = (r() - 0.5) * 18; d[i] += k; d[i + 1] += k; d[i + 2] += k; }
