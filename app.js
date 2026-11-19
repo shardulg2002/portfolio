@@ -2,7 +2,9 @@
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
 const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-const touchMode = () => matchMedia("(hover: none)").matches;
+let lastPointer = "";
+document.addEventListener("pointerdown", e => { lastPointer = e.pointerType; }, true);
+const touchMode = () => lastPointer === "touch" || matchMedia("(hover: none)").matches;
 function hashStr(s){ let h = 2166136261; for (const ch of s){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
 function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 
@@ -280,9 +282,16 @@ function renderSkills(){ $("#skills").innerHTML = tagsHTML(SITE.tools); }
 const dlg = $("#player"), flipper = $("#flipper"), flipBtn = $("#flip-btn");
 let currentId = null, flipTimer = null;
 
-function setFlipped(on){
+const faceFront = $("#face-front"), faceBack = $("#face-back");
+let offTimer = null;
+function setFlipped(on, instant){
+  const show = on ? faceBack : faceFront, hide = on ? faceFront : faceBack;
+  clearTimeout(offTimer);
+  show.classList.remove("is-off");
   flipper.classList.toggle("is-flipped", on);
   flipBtn.textContent = on ? "Show front" : "Show back";
+  const finish = () => { hide.classList.add("is-off"); if (on) dlg.scrollTop = 0; };
+  if (instant || reduceMotion()) finish(); else offTimer = setTimeout(finish, 900);
 }
 function renderPlayer(p){
   dlg.style.setProperty("--proj", p.cover.accent);
@@ -459,8 +468,8 @@ function openProject(id){
   renderPlayer(p);
   startClip(p);
   clearTimeout(flipTimer);
-  flipper.style.transition = "none"; setFlipped(false); void flipper.offsetWidth; flipper.style.transition = "";
-  if (!dlg.open) dlg.showModal();
+  flipper.style.transition = "none"; setFlipped(false, true); void flipper.offsetWidth; flipper.style.transition = "";
+  if (!dlg.open){ dlg.showModal(); dlg.focus(); }
   dlg.scrollTop = 0;
   flipTimer = setTimeout(() => setFlipped(true), reduceMotion() ? 0 : 550);
   if (location.hash !== "#" + id) location.hash = id;
@@ -496,6 +505,9 @@ window.addEventListener("hashchange", syncFromHash);
 function closeCards(except){ document.querySelectorAll(".card.is-open").forEach(c => { if (c !== except) c.classList.remove("is-open"); }); }
 document.addEventListener("click", e => {
   if (e.target.closest("#clip-play")){ toggleClip(); return; }
+  // touch: the first tap on a sleeve only shows its description, even if it lands on the button
+  const tapped = e.target.closest(".card");
+  if (tapped && touchMode() && !tapped.classList.contains("is-open")){ e.preventDefault(); closeCards(tapped); tapped.classList.add("is-open"); return; }
   const opener = e.target.closest("[data-open]");
   if (opener){ e.preventDefault(); openProject(opener.dataset.open); return; }
   const chip = e.target.closest(".chip");
