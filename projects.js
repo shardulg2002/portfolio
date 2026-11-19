@@ -87,7 +87,6 @@ const PROJECTS = [
     award: "Top score",
     context: "Class project · Highest score in the class",
     links: {
-      demo: "https://fintech-platform-seven.vercel.app",
       repo: "https://github.com/kunthshah21/Fintech-Platform"
     },
     cover: { style: "rings", bg: "#13302a", ink: "#e9dcb4", accent: "#d9a441" }
