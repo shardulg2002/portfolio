@@ -284,6 +284,9 @@ dialog.player::backdrop{background:rgba(6,6,8,.8);-webkit-backdrop-filter:blur(6
   .sleeve-meta{top:8px;left:9px;right:9px}
   .sleeve-cat{display:none}
   .sleeve-title{font-size:15px}
+  .back-head{gap:12px}
+  .back-head .vinyl-wrap{width:44px}
+  .back-head h2{font-size:27px}
   .card-info h3{font-size:17px}
   .site-nav{gap:16px}
 }
